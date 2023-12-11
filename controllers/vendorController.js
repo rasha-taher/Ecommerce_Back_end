@@ -8,7 +8,8 @@ const addVendor = async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         phone: req.body.phone,
-        company: req.body.company
+        company: req.body.company,
+        password: req.body.password
       });
   
       const savedVendor = await vendor.save(); 
@@ -100,12 +101,26 @@ const addVendor = async (req, res) => {
     }
   };
   
-
+  const vendorLogin = async (req, res) => {
+    try {
+      const { email, password } = req.params;
+      const vendors = await Vendor.find({ email, password });
+  
+      if (vendors.length > 0) {
+        res.json(vendors);
+      } else {
+        res.status(404).json({ message: 'Vendors not found for the provided email and password' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
  
   module.exports = {
     addVendor,
     getAllVendors,
     getVendorByNameAndLastName,
     deleteVendorById,
-    updateVendorById
+    updateVendorById,
+    vendorLogin
   }

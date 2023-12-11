@@ -7,17 +7,18 @@ const{
     getProductByName,
     getPoductByVendorName,
     getProductByCategory,
+    getProductById,
     deleteProductByName,
     updateProductByName,
     updateProductById
 }=require("../controllers/productController");
-
 
 router.post("/addProduct", addProduct);
 router.get("/getAllProduct", getAllProduct);
 router.get("/getProductByName/:name", getProductByName);
 router.get("/getPoductByVendorName/:vendorName", getPoductByVendorName);
 router.get("/getProductByCategory/:category", getProductByCategory);
+router.get("/getProductById/:id", getProductById);
 router.delete("/deleteProductByName/:name", deleteProductByName);
 router.put("/updateProductByName/:name", updateProductByName);
 router.put("/updateProductById/:id", updateProductById);

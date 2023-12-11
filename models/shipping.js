@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderSchema = new mongoose.Schema({
+const shippingSchema = new mongoose.Schema({
     firstName: { type: String},
     lastName: { type: String},
     email: { type: String},
@@ -10,8 +10,9 @@ const orderSchema = new mongoose.Schema({
     postalCode: { type: Number},
     streetAddress: { type: String},
     totalPrice: { type: Number},
+    status: {type:String}
   });
   
-const Orders = mongoose.model('Orders', orderSchema);
+const Shippings = mongoose.model('Shippings', shippingSchema);
   
-  module.exports = Orders ;
+  module.exports = Shippings ;

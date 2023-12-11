@@ -22,5 +22,7 @@ db.once('open' , ()=> console.log(" Connected to Database"))
 
 const productRoute= require('./routes/productRoutes')
 const vendorRoute= require('./routes/vendoreRoutes')
+const categoryRoute= require('./routes/categoriesRoutes')
 app.use('/products', productRoute)
 app.use('/vendors', vendorRoute)
+app.use('/category', categoryRoute)

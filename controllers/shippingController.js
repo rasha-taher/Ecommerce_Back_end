@@ -1,4 +1,4 @@
-const Category = require("../models/categories");
+const Shipping = require("../models/shipping");
 
 const addCategory = async (req, res) => {
   try {

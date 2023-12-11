@@ -26,7 +26,7 @@ const addProduct = async (req, res) => {
   }
 };
 
-  const getAllProduct = async (req, res) => {
+const getAllProduct = async (req, res) => {
     try {
       const data = await Product.find({});
       res.send(data);
@@ -45,6 +45,17 @@ const addProduct = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+  const getProductById = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const products = await Product.find({ _id: id });
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
   const getPoductByVendorName = async (req, res) => {
     try {
       const vendorName = req.params.vendorName;
@@ -152,6 +163,7 @@ const updateProductById = async (req, res) => {
     getProductByName,
     getPoductByVendorName,
     getProductByCategory,
+    getProductById,
     deleteProductByName,
     updateProductByName,
     updateProductById
