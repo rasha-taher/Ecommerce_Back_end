@@ -10,7 +10,8 @@ const{
     getProductById,
     deleteProductByName,
     updateProductByName,
-    updateProductById
+    updateProductById,
+    deleteProductById
 }=require("../controllers/productController");
 
 router.post("/addProduct", addProduct);
@@ -22,5 +23,5 @@ router.get("/getProductById/:id", getProductById);
 router.delete("/deleteProductByName/:name", deleteProductByName);
 router.put("/updateProductByName/:name", updateProductByName);
 router.put("/updateProductById/:id", updateProductById);
-
+router.delete("/deleteProductById/:id", deleteProductById);
 module.exports = router;

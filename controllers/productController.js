@@ -156,7 +156,23 @@ const updateProductById = async (req, res) => {
     });
   }
 };
-  
+const deleteProductById= async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const projects = await Product.deleteOne({ _id: id });
+    res.status(200).json({
+      success: true,
+      message: "Product deleted successfully",
+      projects: projects,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Error occurred while deleting the product",
+      error: error,
+    });
+  }
+};
   module.exports = {
     addProduct,
     getAllProduct,
@@ -166,5 +182,6 @@ const updateProductById = async (req, res) => {
     getProductById,
     deleteProductByName,
     updateProductByName,
-    updateProductById
-  }
+    updateProductById,
+    deleteProductById
+}

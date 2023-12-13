@@ -1,28 +1,28 @@
 const Shipping = require("../models/shipping");
 
-const addCategory = async (req, res) => {
+const addShipping = async (req, res) => {
   try {
-    const category = new Category({
-      category: req.body.category,
+    const shipping = new Shipping({
+      shipping: req.body.category,
     });
 
-    const saveCategory = await category.save();
+    const saveShipping = await shipping.save();
     res.status(200).json({
       code: 200,
-      message: "Category added successfully",
-      data: saveCategory,
+      message: "Shipping added successfully",
+      data: saveShipping,
     });
   } catch (error) {
     res.status(400).json({
       code: 400,
-      message: "Catgory was not added successfully",
+      message: "Shipping was not added successfully",
       error: error.message,
     });
   }
 };
-const getAllCategories = async (req, res) => {
+const getAllShippingOrders = async (req, res) => {
   try {
-    const data = await Category.find({});
+    const data = await Shipping.find({});
     res.send(data);
   } catch (err) {
     console.error(err);
@@ -31,6 +31,6 @@ const getAllCategories = async (req, res) => {
 };
 
 module.exports = {
-    addCategory,
-    getAllCategories
+  addShipping,
+  getAllShippingOrders
 }
