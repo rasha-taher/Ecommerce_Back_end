@@ -88,8 +88,3 @@ app.put('owners/profile', verifyToken, async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});

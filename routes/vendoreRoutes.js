@@ -6,8 +6,10 @@ const{
     getAllVendors,
     getVendorByNameAndLastName,
     deleteVendorById,
-    updateVendorById,
-    vendorLogin
+    updateVendorByEmail,
+    vendorLogin,
+    getVendorNameByEmail,
+    getVendorByEmail
 
 }= require("../controllers/vendorController");
 
@@ -16,7 +18,8 @@ router.get("/getAllVendors", getAllVendors);
 router.get("/getVendorByNameAndLastName/:name/:lastName", getVendorByNameAndLastName);
 router.get("/vendorLogin/:email/:password", vendorLogin);
 router.delete("/deleteVendorById/:id", deleteVendorById);
-router.put("/updateVendorById/:id", updateVendorById);
-
+router.put("/updateVendorByEmail/:email", updateVendorByEmail);
+router.get("/getVendorNameByEmail/:email", getVendorNameByEmail);
+router.get("/getVendorByEmail/:email", getVendorByEmail);
 module.exports = router;
   

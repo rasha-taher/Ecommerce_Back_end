@@ -70,14 +70,14 @@ const addVendor = async (req, res) => {
       });
     }
   };
-  const updateVendorById = async (req, res) => {
+  const updateVendorByEmail = async (req, res) => {
     try {
-      const { id } = req.params; // Extract ID from request parameters
+      const { email } = req.params; 
   
-      const updatedVendor = await Vendor.findByIdAndUpdate(
-        id,
-        { $set: req.body },
-        { new: true }
+      const updatedVendor = await Vendor.findOneAndUpdate(
+        { email },
+        { $set: req.body }, 
+        { new: true } 
       );
   
       if (updatedVendor) {
@@ -101,6 +101,7 @@ const addVendor = async (req, res) => {
     }
   };
   
+  
   const vendorLogin = async (req, res) => {
     try {
       const { email, password } = req.params;
@@ -115,12 +116,44 @@ const addVendor = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
- 
+  const getVendorNameByEmail = async (req, res) => {
+    try {
+      const { email } = req.params;
+      const vendor = await Vendor.findOne({ email }); // Using findOne instead of find to get a single vendor
+  
+      if (vendor) {
+        const { name , lastName} = vendor; // Assuming 'name' is the field in the Vendor schema
+        res.json({ name, lastName , email }); // Return the name and email in the response
+      } else {
+        res.status(404).json({ message: 'Vendor not found for the provided email' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  const getVendorByEmail = async (req, res) => {
+    try {
+      const { email } = req.params;
+      const vendors = await Vendor.find({ email });
+  
+      if (vendors.length > 0) {
+        res.json(vendors);
+      } else {
+        res.status(404).json({ message: 'Vendors not found for the provided email' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
   module.exports = {
     addVendor,
     getAllVendors,
     getVendorByNameAndLastName,
     deleteVendorById,
-    updateVendorById,
-    vendorLogin
+    updateVendorByEmail,
+    vendorLogin,
+    getVendorNameByEmail,
+    getVendorByEmail
   }

@@ -10,6 +10,7 @@ const shippingSchema = new mongoose.Schema({
     postalCode: { type: Number},
     streetAddress: { type: String},
     totalPrice: { type: Number},
+    date:{type: String},
     status: {type:String}
   });
   
