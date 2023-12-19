@@ -27,7 +27,7 @@ const addOrderDetail = async (req, res) => {
   };
   const getAllOrders = async (req, res) => {
     try {
-      const data = await OrderDetail.OrderDetail({});
+      const data = await OrderDetail.find({});
       res.send(data);
     } catch (err) {
       console.error(err);
@@ -66,9 +66,61 @@ const addOrderDetail = async (req, res) => {
       return res.status(500).json({ error: 'An error occurred while updating the product status' });
     }
   };
+  const deleteorderDetailById= async (req, res) => {
+    try {
+      const { id } = req.params; 
+      const deletedOrderDetail = await OrderDetail.deleteOne({ _id: id });
+      res.status(200).json({
+        success: true,
+        message: "Vendor deleted successfully",
+        projects: deletedOrderDetail,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: "Error occurred while deleting the product",
+        error: error,
+      });
+    }
+  };
+
+  
+  const updateOrderDetailById = async (req, res) => {
+    try {
+      const { id } = req.params; // Extract ID from request parameters
+  
+      const updateorderDetail = await OrderDetail.findByIdAndUpdate(
+        id,
+        { $set: req.body },
+        { new: true }
+      );
+  
+      if (updateorderDetail) {
+        res.status(200).json({
+          success: true,
+          message: "Vendor updated successfully",
+          vendor: updateorderDetail,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Vendor not found",
+        });
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: "Error occurred while updating the vendor",
+        error: error.message,
+      });
+    }
+  };
+  
   module.exports = {
     addOrderDetail,
     getAllOrders,
     getOrderByClientEmail,
-    updateProductStatus
+    updateProductStatus,
+    deleteorderDetailById,
+    updateOrderDetailById
   }

@@ -29,8 +29,25 @@ const getAllShippingOrders = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
-
+const deleteShippingById= async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const deletedShipping = await Shipping.deleteOne({ _id: id });
+    res.status(200).json({
+      success: true,
+      message: "Shipping deleted successfully",
+      projects: deletedShipping,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "Error occurred while deleting the Shipping",
+      error: error,
+    });
+  }
+};
 module.exports = {
   addShipping,
-  getAllShippingOrders
+  getAllShippingOrders,
+  deleteShippingById
 }

@@ -3,10 +3,11 @@ const router = express.Router();
 
 const {
     addShipping,
-    getAllShippingOrders
+    getAllShippingOrders,
+    deleteShippingById
   }= require("../controllers/shippingController");
 
   router.post("/addShipping", addShipping);
-
+  router.delete("/deleteShippingById/:id", deleteShippingById);
   router.get("/getAllShippingOrders", getAllShippingOrders);
   module.exports = router;

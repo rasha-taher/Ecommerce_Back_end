@@ -128,10 +128,10 @@ const updateProductByName = async (req, res) => {
 // Update product by ID
 const updateProductById = async (req, res) => {
   try {
-    const { id } = req.params; // Extract ID from request parameters
+    const { id } = req.params; 
 
     const updatedProduct = await Product.findByIdAndUpdate(
-      _id,
+      id,
       { $set: req.body },
       { new: true }
     );

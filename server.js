@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser=require('body-parser');
 const mongoose= require('mongoose');
 const PORT = 8000;
-
+app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json())
