@@ -14,7 +14,12 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 })
 
-mongoose.connect(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL, {
+
+    useNewUrlParser: "true",
+    useUnifiedTopology: "true"
+  
+  })
 const db = mongoose.connection;
 db.on('error',(error)=> console.error.bind(error , "Error when connceting to database"))
 db.once('open' , ()=> console.log(" Connected to Database"))
