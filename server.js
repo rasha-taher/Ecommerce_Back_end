@@ -15,16 +15,17 @@ app.listen(PORT, () => {
 })
 
 mongoose.connect(process.env.MONGODB_URL, {
-
-    useNewUrlParser: "true",
-    useUnifiedTopology: "true"
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
   
+  const db = mongoose.connection;
+  db.on('error', (error) => {
+    console.error('Error connecting to database:', error);
+  });
+  db.once('open', () => {
+    console.log('Connected to Database');
   })
-const db = mongoose.connection;
-db.on('error',(error)=> console.error.bind(error , "Error when connceting to database"))
-db.once('open' , ()=> console.log(" Connected to Database"))
-
-
 const productRoute= require('./routes/productRoutes')
 const vendorRoute= require('./routes/vendoreRoutes')
 const categoryRoute= require('./routes/categoriesRoutes')
