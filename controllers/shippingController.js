@@ -46,8 +46,27 @@ const deleteShippingById= async (req, res) => {
     });
   }
 };
+
+async function cancelShipping(shippingId) {
+  try {
+    const updatedShipping = await Shipping.findByIdAndUpdate(
+      shippingId,
+      { $set: { status: 'cancel' } },
+      { new: true } // To get the updated record after the update operation
+    );
+
+    if (!updatedShipping) {
+      throw new Error('Shipping record not found');
+    }
+
+    return updatedShipping;
+  } catch (error) {
+    throw new Error(`Failed to update shipping status: ${error.message}`);
+  }
+}
 module.exports = {
   addShipping,
   getAllShippingOrders,
-  deleteShippingById
+  deleteShippingById,
+  cancelShipping
 }

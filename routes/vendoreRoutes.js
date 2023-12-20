@@ -25,4 +25,3 @@ router.get("/getVendorNameByEmail/:email", getVendorNameByEmail);
 router.get("/getVendorByEmail/:email", getVendorByEmail);
 router.post('/vendorLogin', vendorLogin);
 module.exports = router;
-  

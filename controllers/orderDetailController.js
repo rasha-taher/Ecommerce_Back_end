@@ -115,12 +115,30 @@ const addOrderDetail = async (req, res) => {
       });
     }
   };
+  const cancelOrder = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const updatedShipping = await OrderDetail.findByIdAndUpdate(
+        id,
+        { $set: { status: 'cancel' } },
+        { new: true } 
+      );
   
+      if (!updatedShipping) {
+        throw new Error('Shipping record not found');
+      }
+  
+      return updatedShipping;
+    } catch (error) {
+      throw new Error(`Failed to update shipping status: ${error.message}`);
+    }
+  }
   module.exports = {
     addOrderDetail,
     getAllOrders,
     getOrderByClientEmail,
     updateProductStatus,
     deleteorderDetailById,
-    updateOrderDetailById
+    updateOrderDetailById,
+    cancelOrder
   }
